@@ -26,7 +26,7 @@ export default function Navbar() {
         {/* Logo + Name */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
-            src="/logo.jpg" // <-- add your logo file in /public/logo.png
+            src="/logo.JPG" // <-- add your logo file in /public/logo.png
             alt="Desert Aromas Logo"
             width={40}
             height={40}
