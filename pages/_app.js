@@ -1,7 +1,7 @@
 import '@/styles/globals.css'
 import Head from 'next/head'
 import Navbar from '@/components/Navbar'
-import Footer from '@/components/footer'
+import Footer from '@/components/Footer' // 👈 Capital F (must match filename)
 
 const SITE_TITLE = 'Desert Aromas | Luxury Arabian Inspired Perfumes';
 const SITE_DESC = 'Discover our luxury Arabian-inspired perfumes. Elegant, timeless fragrances crafted for those who seek sophistication.';
@@ -25,8 +25,14 @@ export default function MyApp({ Component, pageProps }) {
         <meta name="twitter:description" content={SITE_DESC} />
         <meta name="twitter:image" content="/og-banner.jpg" />
       </Head>
-      <Navbar />
-      <Component {...pageProps} />
+
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <Component {...pageProps} />
+        </main>
+        <Footer />
+      </div>
     </>
   )
 }
