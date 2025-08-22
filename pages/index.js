@@ -112,10 +112,10 @@ export default function Home() {
   >
     <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
       {[
-        { id: 1, name: "Amber Oud Gold", price: "£39.99", image: "/products/sample5.jpg" },
-        { id: 2, name: "Desert Rose", price: "£34.99", image: "/products/sample6.jpg" },
-        { id: 3, name: "Velour Oud", price: "£54.99", image: "/products/sample7.jpg" },
-        { id: 4, name: "Noir Elegance", price: "£44.99", image: "/products/sample8.jpg" },
+        { id: 1, name: "Amber Oud Gold", price: "£39.99", image: "/products/sample1.jpg" },
+        { id: 2, name: "Desert Rose", price: "£34.99", image: "/products/sample2.jpg" },
+        { id: 3, name: "Velour Oud", price: "£54.99", image: "/products/sample3.jpg" },
+        { id: 4, name: "Noir Elegance", price: "£44.99", image: "/products/sample4.jpg" },
       ].map((p, i) => (
         <motion.div
           key={p.id}
