@@ -21,9 +21,20 @@ a {
 }
 
 .btn {
-  @apply inline-block px-5 py-3 rounded-lg;
-  background: var(--gold);
-  color: #fff;
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 9999px; /* fully rounded pill shape */
+  background-color: #f7e7ce; /* light champagne gold */
+  color: #1a1a1a; /* dark text for contrast */
+  font-weight: 500;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: #f2dcae; /* slightly deeper gold */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .card {
