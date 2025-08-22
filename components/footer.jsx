@@ -27,15 +27,22 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2">
-            <li>
-              <Link href="/about" className="hover:text-white transition-colors">About</Link>
-            </li>
-            <li>
-              <Link href="/collections" className="hover:text-white transition-colors">Shop</Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-white transition-colors">Contact</Link>
-            </li>
+            {[
+              { href: "/about", label: "About" },
+              { href: "/collections", label: "Shop" },
+              { href: "/contact", label: "Contact" },
+            ].map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="relative inline-block hover:scale-105 transition-transform duration-300"
+                >
+                  <span className="bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-[length:200%_200%] bg-clip-text text-transparent hover:animate-shimmer">
+                    {link.label}
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
 
@@ -45,37 +52,43 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li className="flex items-center space-x-2">
               <Mail size={16} />
-              <a href="mailto:info@desertaromas.co.uk" className="hover:text-white transition-colors">
+              <a
+                href="mailto:info@desertaromas.co.uk"
+                className="hover:scale-105 transition-transform duration-300 hover:text-white"
+              >
                 info@desertaromas.co.uk
               </a>
             </li>
           </ul>
           <div className="flex space-x-4 mt-4">
-            <a
-              href="https://instagram.com/desertaromas"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="hover:text-white transition-colors"
-            >
-              <Instagram size={22} />
-            </a>
-            <a
-              href="https://facebook.com/desertaromas"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="hover:text-white transition-colors"
-            >
-              <Facebook size={22} />
-            </a>
-            <a
-              href="/collections"
-              aria-label="Shop"
-              className="hover:text-white transition-colors"
-            >
-              <ShoppingBag size={22} />
-            </a>
+            {[
+              {
+                href: "https://instagram.com/desertaromas",
+                label: "Instagram",
+                Icon: Instagram,
+              },
+              {
+                href: "https://facebook.com/desertaromas",
+                label: "Facebook",
+                Icon: Facebook,
+              },
+              {
+                href: "/collections",
+                label: "Shop",
+                Icon: ShoppingBag,
+              },
+            ].map(({ href, label, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="hover:text-white transition-colors transform hover:scale-110 duration-300"
+              >
+                <Icon size={22} />
+              </a>
+            ))}
           </div>
         </div>
       </div>
@@ -86,4 +99,21 @@ export default function Footer() {
       </div>
     </footer>
   );
+}
+
+/* Extra shimmer animation */
+const shimmerStyle = `
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.hover\\:animate-shimmer:hover {
+  animation: shimmer 2s linear infinite;
+}
+`;
+
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.innerHTML = shimmerStyle;
+  document.head.appendChild(style);
 }
