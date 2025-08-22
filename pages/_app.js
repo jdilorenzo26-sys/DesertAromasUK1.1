@@ -1,6 +1,7 @@
 import '@/styles/globals.css'
 import Head from 'next/head'
 import Navbar from '@/components/Navbar'
+import Footer from '@/components/footer'
 
 const SITE_TITLE = 'Desert Aromas | Luxury Arabian Inspired Perfumes';
 const SITE_DESC = 'Discover our luxury Arabian-inspired perfumes. Elegant, timeless fragrances crafted for those who seek sophistication.';
