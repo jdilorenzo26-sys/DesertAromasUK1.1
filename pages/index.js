@@ -7,14 +7,23 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-[#1f1c17] to-[#2a2723] text-white">
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center text-center overflow-hidden">
-        <Image
-          src="/hero_banner.png"
-          alt="Luxury Perfume Collection"
-          fill
-          priority
-          className="object-cover brightness-50"
-        />
-        {/* Shimmer Overlay*/}
+        {/* Cinematic slow zoom background */}
+        <motion.div
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.05 }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
+          className="absolute inset-0"
+        >
+          <Image
+            src="/hero_banner.png"
+            alt="Luxury Perfume Collection"
+            fill
+            priority
+            className="object-cover brightness-50"
+          />
+        </motion.div>
+
+        {/* Shimmer Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
 
         <motion.div
@@ -47,7 +56,7 @@ export default function Home() {
           >
             <Link
               href="/collections"
-              className="inline-block px-8 py-3 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all shadow-lg"
+              className="inline-block px-8 py-3 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all shadow-lg hover:shadow-[0_0_20px_rgba(198,165,114,0.6)]"
             >
               Explore Collections
             </Link>
@@ -68,7 +77,7 @@ export default function Home() {
           ].map((p, i) => (
             <motion.div
               key={p.id}
-              className="rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-lg hover:shadow-[#c5a572]/30 transition-all"
+              className="rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-lg hover:shadow-[0_0_20px_rgba(198,165,114,0.5)] transition-all"
               whileHover={{ scale: 1.04 }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +98,7 @@ export default function Home() {
                 <p className="mt-1 opacity-80">{p.price}</p>
                 <Link
                   href="/collections"
-                  className="inline-block mt-4 px-5 py-2 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all text-sm"
+                  className="inline-block mt-4 px-5 py-2 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all text-sm hover:shadow-[0_0_15px_rgba(198,165,114,0.5)]"
                 >
                   Shop Now
                 </Link>
@@ -98,58 +107,59 @@ export default function Home() {
           ))}
         </div>
       </section>
-{/* New Arrivals Carousel */}
-<section className="max-w-6xl mx-auto px-6 py-20">
-  <h2 className="text-3xl font-semibold text-center mb-12 bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent">
-    New Arrivals
-  </h2>
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8 }}
-    className="relative"
-  >
-    <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
-      {[
-        { id: 1, name: "Amber Oud Gold", price: "£39.99", image: "/products/sample1.jpg" },
-        { id: 2, name: "Desert Rose", price: "£34.99", image: "/products/sample2.jpg" },
-        { id: 3, name: "Velour Oud", price: "£54.99", image: "/products/sample3.jpg" },
-        { id: 4, name: "Noir Elegance", price: "£44.99", image: "/products/sample4.jpg" },
-      ].map((p, i) => (
+
+      {/* New Arrivals Carousel */}
+      <section className="max-w-6xl mx-auto px-6 py-20">
+        <h2 className="text-3xl font-semibold text-center mb-12 bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent">
+          New Arrivals
+        </h2>
         <motion.div
-          key={p.id}
-          className="min-w-[250px] sm:min-w-[300px] rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-md hover:shadow-[#c5a572]/30 transition-all"
-          whileHover={{ scale: 1.05 }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: i * 0.15 }}
+          transition={{ duration: 0.8 }}
+          className="relative"
         >
-          <div className="aspect-square overflow-hidden bg-[#1f1c17] flex items-center justify-center">
-            <Image
-              src={p.image}
-              alt={p.name}
-              width={400}
-              height={400}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="p-4 text-center">
-            <h3 className="text-lg font-semibold text-[#c5a572]">{p.name}</h3>
-            <p className="mt-1 opacity-80">{p.price}</p>
-            <Link
-              href="/collections"
-              className="inline-block mt-3 px-5 py-2 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all text-sm"
-            >
-              Shop Now
-            </Link>
+          <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
+            {[
+              { id: 1, name: "Amber Oud Gold", price: "£39.99", image: "/products/sample1.jpg" },
+              { id: 2, name: "Desert Rose", price: "£34.99", image: "/products/sample2.jpg" },
+              { id: 3, name: "Velour Oud", price: "£54.99", image: "/products/sample3.jpg" },
+              { id: 4, name: "Noir Elegance", price: "£44.99", image: "/products/sample4.jpg" },
+            ].map((p, i) => (
+              <motion.div
+                key={p.id}
+                className="min-w-[250px] sm:min-w-[300px] rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-md hover:shadow-[0_0_15px_rgba(198,165,114,0.4)] transition-all"
+                whileHover={{ scale: 1.05 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
+              >
+                <div className="aspect-square overflow-hidden bg-[#1f1c17] flex items-center justify-center">
+                  <Image
+                    src={p.image}
+                    alt={p.name}
+                    width={400}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <h3 className="text-lg font-semibold text-[#c5a572]">{p.name}</h3>
+                  <p className="mt-1 opacity-80">{p.price}</p>
+                  <Link
+                    href="/collections"
+                    className="inline-block mt-3 px-5 py-2 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all text-sm hover:shadow-[0_0_12px_rgba(198,165,114,0.4)]"
+                  >
+                    Shop Now
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
-      ))}
-    </div>
-  </motion.div>
-</section>
+      </section>
 
       {/* Call to Action */}
       <section className="relative text-center px-6 py-24 bg-gradient-to-r from-[#2a2723] to-[#1f1c17] border-t border-[#3a352e]">
@@ -163,9 +173,13 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="relative z-10"
         >
-          <h2 className="text-3xl font-semibold mb-6">
+          <motion.h2
+            animate={{ textShadow: ["0 0 10px #c5a572", "0 0 20px #b69363", "0 0 10px #c5a572"] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="text-3xl font-semibold mb-6"
+          >
             Elevate Your Scent Experience
-          </h2>
+          </motion.h2>
           <p className="opacity-80 max-w-2xl mx-auto mb-10">
             At Desert Aromas, we believe luxury fragrances should be accessible
             without compromise. Explore our curated collection today.
@@ -173,7 +187,7 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/collections"
-              className="px-6 py-3 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all"
+              className="px-6 py-3 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all hover:shadow-[0_0_18px_rgba(198,165,114,0.5)]"
             >
               Shop Now
             </Link>
