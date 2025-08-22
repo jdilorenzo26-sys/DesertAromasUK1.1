@@ -49,10 +49,10 @@ export default function Navbar() {
 
         {/* Nav links */}
         <div className="flex items-center space-x-6 font-medium">
-          <Link href="/about" className="hover:text-[#c5a572] transition-colors">
+          <Link href="/about" className="px-4 py-2 border border-[#c5a572] text-[#c5a572] rounded-xl hover:bg-[#c5a572] hover:text-white transition-all">
             About
           </Link>
-          <Link href="/contact" className="hover:text-[#c5a572] transition-colors">
+          <Link href="/contact" className="px-4 py-2 border border-[#c5a572] text-[#c5a572] rounded-xl hover:bg-[#c5a572] hover:text-white transition-all">
             Contact
           </Link>
           <Link
