@@ -33,24 +33,24 @@ export default function Navbar() {
       aria-label="Main navigation"
       className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-gradient-to-r from-[#1f1c17] via-[#24211c] to-[#2a2723] backdrop-blur-md border-b border-[#3a352e] py-2 shadow-xl"
-          : "bg-gradient-to-r from-[#1f1c17] via-[#24211c] to-[#2a2723] backdrop-blur-md border-b border-transparent py-4"
+          ? "bg-gradient-to-r from-[#1f1c17] to-[#2a2723] backdrop-blur-md border-b border-[#3a352e] py-2 shadow-xl"
+          : "bg-gradient-to-r from-[#1f1c17] to-[#2a2723] backdrop-blur-md border-b border-transparent py-4"
       }`}
     >
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
-        {/* Logo + Name */}
+        {/* Logo + Brand */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src="/logo.JPG"
             alt="Desert Aromas Logo"
-            width={scrolled ? 40 : 48}
-            height={scrolled ? 40 : 48}
-            className="rounded-full border border-[#c5a572]/30 shadow-sm transition-all duration-500"
+            width={44}
+            height={44}
+            className="rounded-full border border-[#c5a572]/30 shadow-sm"
             priority
           />
           <span
             className={`${playfair.className} tracking-wide transition-all duration-500 ${
-              scrolled ? "text-lg" : "text-2xl"
+              scrolled ? "text-xl" : "text-2xl"
             } bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent`}
           >
             Desert Aromas
@@ -63,46 +63,47 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-4 py-2 rounded-full border transition-all duration-300 relative overflow-hidden group ${
+              className={`relative px-4 py-2 rounded-full border transition-all duration-300 group overflow-hidden ${
                 pathname === link.href
                   ? "bg-gradient-to-r from-[#b69363] to-[#c5a572] text-white border-transparent shadow-md"
-                  : "border-[#c5a572]/40 text-[#c5a572] hover:text-white"
+                  : "border-[#c5a572]/60 text-[#c5a572]"
               }`}
             >
               <span
-                className="absolute inset-0 bg-gradient-to-r from-[#b69363] to-[#c5a572] opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:shadow-[0_0_10px_rgba(198,165,114,0.6)]"
+                className={`absolute inset-0 bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-[length:200%_200%] opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-all`}
               />
               <span className="relative z-10">{link.label}</span>
             </Link>
           ))}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           className="md:hidden text-[#c5a572]"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
-          aria-expanded={menuOpen}
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-gradient-to-b from-[#1f1c17] via-[#24211c] to-[#2a2723] px-6 py-4 space-y-4 border-t border-[#3a352e] animate-fadeIn">
+        <div className="md:hidden bg-gradient-to-r from-[#1f1c17] to-[#2a2723] px-6 py-4 space-y-4 border-t border-[#3a352e] animate-fadeIn">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`block px-4 py-2 rounded-full border text-center transition-all duration-300 relative overflow-hidden group ${
+              className={`block px-4 py-2 rounded-full border text-center transition-all duration-300 relative group overflow-hidden ${
                 pathname === link.href
                   ? "bg-gradient-to-r from-[#b69363] to-[#c5a572] text-white border-transparent shadow-md"
-                  : "border-[#c5a572]/40 text-[#c5a572] hover:text-white"
+                  : "border-[#c5a572]/60 text-[#c5a572]"
               }`}
               onClick={() => setMenuOpen(false)}
             >
-              <span className="absolute inset-0 bg-gradient-to-r from-[#b69363] to-[#c5a572] opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:shadow-[0_0_10px_rgba(198,165,114,0.6)]" />
+              <span
+                className={`absolute inset-0 bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-[length:200%_200%] opacity-0 group-hover:opacity-100 group-hover:animate-shimmer transition-all`}
+              />
               <span className="relative z-10">{link.label}</span>
             </Link>
           ))}
@@ -110,4 +111,21 @@ export default function Navbar() {
       )}
     </nav>
   );
+}
+
+/* Extra shimmer animation */
+const shimmerStyle = `
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.group-hover\\:animate-shimmer:hover {
+  animation: shimmer 2s linear infinite;
+}
+`;
+
+if (typeof document !== "undefined") {
+  const style = document.createElement("style");
+  style.innerHTML = shimmerStyle;
+  document.head.appendChild(style);
 }
