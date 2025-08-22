@@ -25,7 +25,7 @@ export default function Navbar() {
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-[#F3EFDB]/95 backdrop-blur-md border-b border-[#e6dccb] py-2 shadow-md"
-          : "bg-[#fdfbf7]/90 backdrop-blur-md border-b border-[#f1e8d9] py-4"
+          : "bg-[#F3EFDB]/90 backdrop-blur-md border-b border-[#f1e8d9] py-4"
       }`}
     >
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
