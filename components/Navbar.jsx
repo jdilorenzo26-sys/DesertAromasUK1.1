@@ -2,6 +2,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Playfair_Display } from 'next/font/google';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '600', '700'],
+});
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -33,12 +39,12 @@ export default function Navbar() {
             className="rounded-full"
           />
           <span
-            className={`tracking-wide font-serif transition-all duration-300 ${
-              scrolled ? "text-xl" : "text-2xl"
-            } text-[#c5a572]`}
-          >
-            Desert Aromas
-          </span>
+  className={`${playfair.className} tracking-wide transition-all duration-300 ${
+    scrolled ? "text-xl" : "text-2xl"
+  } text-[#c5a572]`}
+>
+  Desert Aromas
+</span>
         </Link>
 
         {/* Nav links */}
