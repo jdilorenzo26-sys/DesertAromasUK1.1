@@ -38,7 +38,7 @@ export default function Navbar() {
   }`}
 >
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
-        {/* Logo + Name */}
+        {/* Logo + Name2 */}
         <Link href="/" className="flex items-center space-x-2">
           <Image
             src="/logo.JPG"
