@@ -7,7 +7,8 @@ export default function Home() {
         <h1 className="text-4xl md:text-5xl font-bold">Luxury Inspired Perfumes</h1>
         <p className="mt-4 text-lg max-w-2xl mx-auto opacity-80">Discover timeless Arabic-inspired scents crafted with elegance.</p>
         <div className="mt-8">
-          <Link className="btn" href="/collections">Shop Collections</Link>
+          <Link className="btn" href="/collections">Samples</Link>
+          <Link className="btn" href="/collections">Samples</Link>
         </div>
       </section>
     </main>
