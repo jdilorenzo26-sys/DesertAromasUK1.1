@@ -31,10 +31,10 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Main navigation"
-      className={`sticky top-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-[#F3EFDB]/95 backdrop-blur-md border-b border-[#e6dccb] py-2 shadow-md"
-          : "bg-[#F3EFDB]/90 backdrop-blur-md border-b border-[#F3EFDB] py-4"
+          ? "bg-[#F3EFDB]/95 backdrop-blur-md border-b border-[#e6dccb] py-2 shadow-lg"
+          : "bg-[#F3EFDB]/90 backdrop-blur-md border-b border-transparent py-4"
       }`}
     >
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
@@ -43,15 +43,15 @@ export default function Navbar() {
           <Image
             src="/logo.JPG"
             alt="Desert Aromas Logo"
-            width={40}
-            height={40}
-            className="rounded-full"
+            width={44}
+            height={44}
+            className="rounded-full border border-[#c5a572]/30 shadow-sm"
             priority
           />
           <span
-            className={`${playfair.className} tracking-wide transition-all duration-300 ${
+            className={`${playfair.className} tracking-wide transition-all duration-500 ${
               scrolled ? "text-xl" : "text-2xl"
-            } text-[#c5a572]`}
+            } bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent`}
           >
             Desert Aromas
           </span>
@@ -63,13 +63,16 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-4 py-2 rounded-xl transition-all border ${
+              className={`px-4 py-2 rounded-full border transition-all duration-300 relative overflow-hidden group ${
                 pathname === link.href
-                  ? "bg-[#c5a572] text-white border-[#c5a572]"
-                  : "border-[#c5a572] text-[#c5a572] hover:bg-[#c5a572] hover:text-white"
+                  ? "bg-gradient-to-r from-[#b69363] to-[#c5a572] text-white border-transparent shadow-md"
+                  : "border-[#c5a572]/60 text-[#c5a572] hover:text-white"
               }`}
             >
-              {link.label}
+              <span
+                className={`absolute inset-0 bg-gradient-to-r from-[#b69363] to-[#c5a572] opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+              />
+              <span className="relative z-10">{link.label}</span>
             </Link>
           ))}
         </div>
@@ -86,17 +89,17 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-[#F3EFDB] px-6 py-4 space-y-4 border-t border-[#e6dccb]">
+        <div className="md:hidden bg-[#F3EFDB] px-6 py-4 space-y-4 border-t border-[#e6dccb] animate-fadeIn">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className={`block px-4 py-2 rounded-xl transition-all border text-center ${
+              className={`block px-4 py-2 rounded-full border text-center transition-all duration-300 ${
                 pathname === link.href
-                  ? "bg-[#c5a572] text-white border-[#c5a572]"
-                  : "border-[#c5a572] text-[#c5a572] hover:bg-[#c5a572] hover:text-white"
+                  ? "bg-gradient-to-r from-[#b69363] to-[#c5a572] text-white border-transparent shadow-md"
+                  : "border-[#c5a572]/60 text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white"
               }`}
-              onClick={() => setMenuOpen(false)} // close menu on click
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </Link>
