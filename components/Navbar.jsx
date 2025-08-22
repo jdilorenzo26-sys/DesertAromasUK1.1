@@ -30,13 +30,13 @@ export default function Navbar() {
 
   return (
     <nav
-      aria-label="Main navigation"
-      className={`sticky top-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-[#F3EFDB]/95 backdrop-blur-md border-b border-[#e6dccb] py-2 shadow-lg"
-          : "bg-[#F3EFDB]/90 backdrop-blur-md border-b border-transparent py-4"
-      }`}
-    >
+  aria-label="Main navigation"
+  className={`sticky top-0 z-50 transition-all duration-500 ${
+    scrolled
+      ? "bg-gradient-to-r from-[#f7f4e9] via-[#f3efdb] to-[#e9e2cf] backdrop-blur-md border-b border-[#e6dccb] py-2 shadow-lg"
+      : "bg-gradient-to-r from-[#f7f4e9] via-[#f3efdb] to-[#e9e2cf] backdrop-blur-md border-b border-transparent py-4"
+  }`}
+>
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
         {/* Logo + Name */}
         <Link href="/" className="flex items-center space-x-2">
