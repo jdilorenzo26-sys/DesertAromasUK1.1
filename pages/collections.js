@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import Link from 'next/link'
-
 const products = [
   { id: 1, name: "Oud Majestic", price: "£39.99", image: "/products/sample1.jpg", link: "https://www.tiktok.com/" },
   { id: 2, name: "Amber Serenity", price: "£34.99", image: "/products/sample2.jpg", link: "https://www.tiktok.com/" },
@@ -11,10 +8,6 @@ const products = [
 export default function Collections() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
-      <Head>
-        <title>Explore Our Perfume Collections | Desert Aromas UK</title>
-        <meta name="description" content="Browse luxury Arabic-inspired fragrances from Desert Aromas UK." />
-      </Head>
       <h1 className="text-3xl font-bold mb-8 text-center">Collections</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.map((p) => (

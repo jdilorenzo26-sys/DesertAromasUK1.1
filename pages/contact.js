@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useState } from 'react'
 import Router from 'next/router'
 
@@ -9,14 +8,8 @@ export default function Contact() {
   const onSubmit = async (e) => {
     e.preventDefault()
     const form = e.currentTarget
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
-    }
     setStatus('submitting')
 
-    // If a real Formspree ID is provided, post to it; otherwise simulate success and redirect.
     if (FORMSPREE_ID) {
       try {
         const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
@@ -25,24 +18,15 @@ export default function Contact() {
           body: new FormData(form)
         })
         if (res.ok) {
-          Router.push('/thank-you')
-          return
+          Router.push('/thank-you'); return
         }
-      } catch (e) {
-        // fall through to simulated success
-      }
+      } catch (e) {}
     }
-
-    // Simulated success path (demo)
-    setTimeout(() => Router.push('/thank-you'), 500)
+    setTimeout(() => Router.push('/thank-you'), 400)
   }
 
   return (
     <main className="max-w-xl mx-auto px-6 py-12">
-      <Head>
-        <title>Contact Us | Desert Aromas UK</title>
-        <meta name="description" content="Contact Desert Aromas UK — we’d love to hear from you." />
-      </Head>
       <h1 className="text-3xl font-bold mb-6">Contact</h1>
       <form onSubmit={onSubmit} className="card">
         <label className="block mb-4">
