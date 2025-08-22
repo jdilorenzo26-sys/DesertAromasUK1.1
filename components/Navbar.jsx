@@ -2,18 +2,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Playfair_Display } from "next/font/google";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500"],
 });
 
 export default function Navbar() {
@@ -43,13 +38,13 @@ export default function Navbar() {
       }`}
     >
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
-        {/* Logo + Brand with tagline */}
-        <Link href="/" className="flex items-center space-x-3">
+        {/* Logo + Brand */}
+        <Link href="/" className="flex items-center space-x-2 group">
           <Image
             src="/logo.JPG"
             alt="Desert Aromas Logo"
-            width={48}
-            height={48}
+            width={44}
+            height={44}
             className="rounded-full border border-[#c5a572]/30 shadow-sm"
             priority
           />
@@ -57,7 +52,76 @@ export default function Navbar() {
             <span
               className={`${playfair.className} tracking-wide transition-all duration-500 ${
                 scrolled ? "text-xl" : "text-2xl"
-              } bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent`}
+              } bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent 
+              group-hover:drop-shadow-[0_0_12px_rgba(197,165,114,0.6)]`}
             >
               Desert Aromas
             </span>
+            <span
+              className={`text-[11px] md:text-xs text-[#d4c7aa]/80 italic transform transition-all duration-1000 ease-in-out
+                ${scrolled ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"}`}
+            >
+              Luxury Arabian Perfumes
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center space-x-6 font-medium">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`px-4 py-2 rounded-full border transition-all duration-300 relative overflow-hidden group ${
+                pathname === link.href
+                  ? "bg-gradient-to-r from-[#b69363] to-[#c5a572] text-white border-transparent shadow-md"
+                  : "border-[#c5a572]/60 text-[#c5a572] hover:text-white hover:shadow-[0_0_12px_rgba(197,165,114,0.6)]"
+              }`}
+            >
+              <span
+                className={`absolute inset-0 bg-gradient-to-r from-[#b69363] to-[#c5a572] opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+              />
+              <span className="relative z-10">{link.label}</span>
+            </Link>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-[#c5a572]"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-gradient-to-r from-[#1f1c17] to-[#2a2723] px-6 py-4 space-y-4 border-t border-[#3a352e]">
+          {links.map((link, i) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={`block px-4 py-2 rounded-full border text-center transition-all duration-500 transform 
+                ${
+                  pathname === link.href
+                    ? "bg-gradient-to-r from-[#b69363] to-[#c5a572] text-white border-transparent shadow-md"
+                    : "border-[#c5a572]/60 text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white hover:shadow-[0_0_12px_rgba(197,165,114,0.6)]"
+                }
+              `}
+              style={{
+                transitionDelay: `${i * 150}ms`, // staggered fade
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? "translateY(0)" : "translateY(10px)",
+              }}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
+}
