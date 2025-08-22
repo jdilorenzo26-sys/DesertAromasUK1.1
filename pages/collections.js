@@ -1,6 +1,6 @@
 const products = [
-  { id: 1, name: "Afnan - Turathi Electric Sample", price: "£2.50-£4.00", image: "/products/sample1.jpg", link: "https://vm.tiktok.com/ZNdXug9Hh/" },
-  { id: 2, name: "Khadlaj - Island Vanilla Dunes", price: "£2.50-£4.00", image: "/products/sample2.jpg", link: "https://vm.tiktok.com/ZNdXuc1tV/" },
+  { id: 1, name: "Afnan - Turathi Electric Sample", price: "£2.50-£4.00", image: "/products/375x500.108244.2x.png", link: "https://vm.tiktok.com/ZNdXug9Hh/" },
+  { id: 2, name: "Khadlaj - Island Vanilla Dunes", price: "£2.50-£4.00", image: "/products/KHAD0002 (2).png", link: "https://vm.tiktok.com/ZNdXuc1tV/" },
   { id: 3, name: "Royal Musk", price: "£29.99", image: "/products/sample3.jpg", link: "https://www.tiktok.com/" },
   { id: 4, name: "Saffron Noir", price: "£44.99", image: "/products/sample4.jpg", link: "https://www.tiktok.com/" },
 ];
