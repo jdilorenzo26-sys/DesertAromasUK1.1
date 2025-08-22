@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #D4AF37;
+  --ink: #3C3220;
+  --paper: #FAF9F6;
+}
+
+html, body { height: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, Arial, sans-serif;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.btn {
+  @apply inline-block px-5 py-3 rounded-lg;
+  background: var(--gold);
+  color: #fff;
+}
+
+.card {
+  @apply border rounded-xl p-4 bg-white;
+  border-color: rgba(0,0,0,0.08);
+}
