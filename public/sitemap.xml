@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://example.com/</loc></url>
-  <url><loc>https://example.com/collections</loc></url>
-  <url><loc>https://example.com/about</loc></url>
-  <url><loc>https://example.com/contact</loc></url>
-  <url><loc>https://example.com/thank-you</loc></url>
-  <url><loc>https://example.com/privacy</loc></url>
-  <url><loc>https://example.com/terms</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/collections</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/about</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/contact</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/thank-you</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/privacy</loc></url>
+  <url><loc>https://www.desertaromas.co.uk/terms</loc></url>
 </urlset>
