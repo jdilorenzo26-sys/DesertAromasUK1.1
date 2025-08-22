@@ -33,8 +33,8 @@ export default function Navbar() {
   aria-label="Main navigation"
   className={`sticky top-0 z-50 transition-all duration-500 ${
     scrolled
-      ? "bg-gradient-to-r from-[#1f1c17] via-[#24211c] to-[#2a2723] backdrop-blur-md border-b border-[#3a352e] py-2 shadow-xl"
-      : "bg-gradient-to-r from-[#1f1c17] via-[#24211c] to-[#2a2723] backdrop-blur-md border-b border-transparent py-4"
+      ? "bg-gradient-to-r from-[#1f1c17] to-[#2a2723] backdrop-blur-md border-b border-[#3a352e] py-2 shadow-xl"
+      : "bg-gradient-to-r from-[#1f1c17] to-[#2a2723] backdrop-blur-md border-b border-transparent py-4"
   }`}
 >
       <div className="flex items-center justify-between px-6 max-w-7xl mx-auto">
