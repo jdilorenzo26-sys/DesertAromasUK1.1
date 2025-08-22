@@ -6,7 +6,7 @@ export default function About() {
     <main className="bg-gradient-to-r from-[#1f1c17] to-[#2a2723] text-[#d4c7aa] min-h-screen px-6 py-16">
       <div className="max-w-3xl mx-auto">
         
-        {/* Heading */}
+        {/* Heading2.0 */}
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
