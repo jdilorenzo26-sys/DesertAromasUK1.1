@@ -35,7 +35,7 @@ export default function Contact() {
         >
           <p>
             📧 <a href="mailto:sales@desertaromas.co.uk" className="text-[#c5a572] hover:underline">
-              info@desertaromas.co.uk
+              sales@desertaromas.co.uk
             </a>
           </p>
           <p>
