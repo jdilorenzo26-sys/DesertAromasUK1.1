@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* Luxury font pairing (Playfair for headings, Inter for body) */}
+        {/* Luxury font pairing (Playfair for headings, Inter for body0 ) */}
         <link
           href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;700&display=swap"
           rel="stylesheet"
