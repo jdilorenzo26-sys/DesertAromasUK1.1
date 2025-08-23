@@ -1,8 +1,26 @@
+// pages/index.js
+"use client";
 import Link from "next/link";
 import Image from "next/image";
+import useSWR from "swr";
 import { motion } from "framer-motion";
 
+const fetcher = (url) => fetch(url).then((r) => r.json());
+
 export default function Home() {
+  // Featured + New Arrivals from API
+  const { data: featured, error: featErr, isLoading: featLoading } = useSWR(
+    "/api/products?status=live&category=featured&limit=6&sort=created_at&dir=desc",
+    fetcher
+  );
+  const { data: arrivals, error: arrErr, isLoading: arrLoading } = useSWR(
+    "/api/products?status=live&category=new&limit=12&sort=created_at&dir=desc",
+    fetcher
+  );
+
+  const feat = Array.isArray(featured) ? featured : [];
+  const newArr = Array.isArray(arrivals) ? arrivals : [];
+
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#1f1c17] to-[#2a2723] text-white">
       {/* Hero Section */}
@@ -46,8 +64,8 @@ export default function Home() {
             transition={{ duration: 0.9, delay: 0.6 }}
             className="text-lg opacity-90 mb-8"
           >
-            Discover timeless, elegant fragrances crafted for those who seek
-            sophistication. Bringing the rich scents of the Middle East to the UK.
+            Discover timeless, elegant fragrances crafted for those who seek sophistication.
+            Bringing the rich scents of the Middle East to the UK.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -64,106 +82,147 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Featured Products */}
+      {/* Featured (from DB) */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-semibold text-center mb-12 bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent">
-          Featured Fragrances
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {[
-            { id: 1, name: "Hayaati", price: "£2.5-£4.00", image: "/products/hayaati.png" },
-            { id: 2, name: "Hawas Ice", price: "£2.50-£4.00", image: "/products/hawasice.png" },
-            { id: 3, name: "Island Vanilla Dunes", price: "£2.50 - £4.00", image: "/products/KHAD0002 (2).png" },
-          ].map((p, i) => (
+        <div className="flex items-end justify-between gap-4 mb-12">
+          <h2 className="text-3xl font-semibold bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent">
+            Featured Fragrances
+          </h2>
+          <Link
+            href="/search?category=featured&sort=created_at&dir=desc"
+            className="text-sm px-4 py-2 rounded-full border border-[#c5a572]/70 text-[#c5a572] hover:bg-[#c5a572] hover:text-black transition"
+            aria-label="See all featured products"
+          >
+            See all Featured →
+          </Link>
+        </div>
+
+        {featLoading && (
+          <p className="text-center text-[#d4c7aa]/80">Loading featured…</p>
+        )}
+        {featErr && (
+          <p className="text-center text-red-300">Failed to load featured.</p>
+        )}
+        {!featLoading && !featErr && feat.length === 0 && (
+          <p className="text-center text-[#d4c7aa]/80">No featured products yet.</p>
+        )}
+
+        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {feat.map((p, i) => (
             <motion.div
               key={p.id}
-              className="rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-lg hover:shadow-[0_0_20px_rgba(198,165,114,0.5)] transition-all"
-              whileHover={{ scale: 1.04 }}
-              initial={{ opacity: 0, y: 30 }}
+              className="group rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-lg hover:shadow-[0_0_20px_rgba(198,165,114,0.35)] transition-all"
+              whileHover={{ scale: 1.03 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: i * 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
             >
-              <div className="aspect-square overflow-hidden bg-[#1f1c17] flex items-center justify-center">
-                <Image
-                  src={p.image}
-                  alt={p.name}
-                  width={500}
-                  height={500}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-5 text-center">
-                <h3 className="text-lg font-semibold text-[#c5a572]">{p.name}</h3>
-                <p className="mt-1 opacity-80">{p.price}</p>
-                <Link
-                  href="/collections"
-                  className="inline-block mt-4 px-5 py-2 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all text-sm hover:shadow-[0_0_15px_rgba(198,165,114,0.5)]"
-                >
-                  Shop Now
-                </Link>
-              </div>
+              <Link href={`/product/${p.id}`} className="block">
+                <div className="relative aspect-square overflow-hidden bg-[#1f1c17]">
+                  <Image
+                    src={p.image_url}
+                    alt={p.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="px-4 py-2 rounded-full border border-white/60 text-white/95 text-sm backdrop-blur-sm">
+                      View details
+                    </span>
+                  </div>
+                </div>
+                <div className="p-5 text-center">
+                  <h3 className="text-lg font-semibold text-[#c5a572] truncate">
+                    {p.name}
+                  </h3>
+                  {p.price_text && <p className="mt-1 opacity-80">{p.price_text}</p>}
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* New Arrivals Carousel */}
+      {/* New Arrivals Carousel (from DB) */}
       <section className="max-w-6xl mx-auto px-6 py-20">
-        <h2 className="text-3xl font-semibold text-center mb-12 bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent">
-          New Arrivals
-        </h2>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative"
-        >
-          <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
-            {[
-              { id: 1, name: "Amber Oud Gold", price: "£39.99", image: "/products/sample1.jpg" },
-              { id: 2, name: "Desert Rose", price: "£34.99", image: "/products/sample2.jpg" },
-              { id: 3, name: "Velour Oud", price: "£54.99", image: "/products/sample3.jpg" },
-              { id: 4, name: "Noir Elegance", price: "£44.99", image: "/products/sample4.jpg" },
-            ].map((p, i) => (
-              <motion.div
-                key={p.id}
-                className="min-w-[250px] sm:min-w-[300px] rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-md hover:shadow-[0_0_15px_rgba(198,165,114,0.4)] transition-all"
-                whileHover={{ scale: 1.05 }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-              >
-                <div className="aspect-square overflow-hidden bg-[#1f1c17] flex items-center justify-center">
-                  <Image
-                    src={p.image}
-                    alt={p.name}
-                    width={400}
-                    height={400}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="p-4 text-center">
-                  <h3 className="text-lg font-semibold text-[#c5a572]">{p.name}</h3>
-                  <p className="mt-1 opacity-80">{p.price}</p>
-                  <Link
-                    href="/collections"
-                    className="inline-block mt-3 px-5 py-2 rounded-full border border-[#c5a572] text-[#c5a572] hover:bg-gradient-to-r hover:from-[#b69363] hover:to-[#c5a572] hover:text-white transition-all text-sm hover:shadow-[0_0_12px_rgba(198,165,114,0.4)]"
-                  >
-                    Shop Now
+        <div className="flex items-end justify-between gap-4 mb-12">
+          <h2 className="text-3xl font-semibold bg-gradient-to-r from-[#b69363] to-[#c5a572] bg-clip-text text-transparent">
+            New Arrivals
+          </h2>
+          <Link
+            href="/search?category=new&sort=created_at&dir=desc"
+            className="text-sm px-4 py-2 rounded-full border border-[#c5a572]/70 text-[#c5a572] hover:bg-[#c5a572] hover:text-black transition"
+            aria-label="See all new arrivals"
+          >
+            See all New Arrivals →
+          </Link>
+        </div>
+
+        {arrLoading && (
+          <p className="text-center text-[#d4c7aa]/80">Loading new arrivals…</p>
+        )}
+        {arrErr && (
+          <p className="text-center text-red-300">Failed to load new arrivals.</p>
+        )}
+        {!arrLoading && !arrErr && newArr.length === 0 && (
+          <p className="text-center text-[#d4c7aa]/80">No new arrivals yet.</p>
+        )}
+
+        {newArr.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4">
+              {newArr.map((p, i) => (
+                <motion.div
+                  key={p.id}
+                  className="group min-w-[250px] sm:min-w-[300px] rounded-xl overflow-hidden border border-[#c5a572]/30 bg-[#2a2723]/70 backdrop-blur-sm shadow-md hover:shadow-[0_0_15px_rgba(198,165,114,0.4)] transition-all"
+                  whileHover={{ scale: 1.05 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.12 }}
+                >
+                  <Link href={`/product/${p.id}`} className="block">
+                    <div className="relative aspect-square overflow-hidden bg-[#1f1c17]">
+                      <Image
+                        src={p.image_url}
+                        alt={p.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 70vw, 300px"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors" />
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="px-4 py-2 rounded-full border border-white/60 text-white/95 text-sm backdrop-blur-sm">
+                          View details
+                        </span>
+                      </div>
+                    </div>
+                    <div className="p-4 text-center">
+                      <h3 className="text-lg font-semibold text-[#c5a572] truncate">
+                        {p.name}
+                      </h3>
+                      {p.price_text && <p className="mt-1 opacity-80">{p.price_text}</p>}
+                    </div>
                   </Link>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
       </section>
 
       {/* Call to Action */}
       <section className="relative text-center px-6 py-24 bg-gradient-to-r from-[#2a2723] to-[#1f1c17] border-t border-[#3a352e]">
-        {/* Subtle glow effect */}
         <div className="absolute inset-0 bg-gradient-radial from-[#c5a572]/10 to-transparent"></div>
 
         <motion.div
