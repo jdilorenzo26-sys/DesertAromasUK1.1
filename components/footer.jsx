@@ -60,7 +60,7 @@ export default function Footer() {
 
           {/* TikTok with SVG + pulse */}
           <a
-            href="#"
+            href="https://www.tiktok.com/@desertaromasuk/"
             target="_blank"
             rel="noopener noreferrer"
             className="relative p-2 rounded-full border border-[#c5a572]/40 hover:border-[#c5a572] transition-all duration-300 hover:shadow-[0_0_15px_rgba(197,165,114,0.7)]"
