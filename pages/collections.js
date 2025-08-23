@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const products = [
   { id: 1, name: "Afnan - Turathi Electric Sample", price: "£2.50-£4.00", image: "/products/375x500.108244.2x.png", link: "https://vm.tiktok.com/ZNdXug9Hh/" },
   { id: 2, name: "Khadlaj - Island Vanilla Dunes Sample", price: "£2.50-£4.00", image: "/products/KHAD0002 (2).png", link: "https://vm.tiktok.com/ZNdXuc1tV/" },
-  { id: 3, name: "Lataffa - Hayaati", price: "£2.50-£4.00", image: "/products/hayaati.png", link: "https://vm.tiktok.com/ZNdXx1Rcx//" },
+  { id: 3, name: "Lataffa - Hayaati", price: "£2.50-£4.00", image: "/products/hayaati.png", link: "https://vm.tiktok.com/ZNdXx1Rcx/" },
   { id: 4, name: "Rasasi - Hawas Ice", price: "£2.50-£4.00", image: "/products/hawasice.png", link: "https://vm.tiktok.com/ZNdXxhmTC/" },
 ];
 
