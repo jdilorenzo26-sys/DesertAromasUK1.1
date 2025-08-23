@@ -9,7 +9,7 @@ import products from "@/data/products";
 export default function Collections() {
   const [query, setQuery] = useState("");
 
-  // Case-insensitive filter by product name
+  // Case-insensitiveilter by product name
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return products;
