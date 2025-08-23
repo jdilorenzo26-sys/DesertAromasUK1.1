@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Facebook, Instagram, Twitter, ArrowUp } from "lucide-react";
+import { Facebook, Instagram, ArrowUp } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   const [showButton, setShowButton] = useState(false);
@@ -46,7 +47,7 @@ export default function Footer() {
 
         {/* Socials */}
         <div className="flex space-x-5">
-          {[Facebook, Instagram, Twitter].map((Icon, i) => (
+          {[Facebook, Instagram].map((Icon, i) => (
             <a
               key={i}
               href="#"
@@ -57,6 +58,17 @@ export default function Footer() {
               <Icon className="w-5 h-5" />
             </a>
           ))}
+
+          {/* TikTok with pulse + glow */}
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative p-2 rounded-full border border-[#c5a572]/40 hover:border-[#c5a572] transition-all duration-300 hover:shadow-[0_0_15px_rgba(197,165,114,0.7)]"
+          >
+            <FaTiktok className="w-5 h-5 animate-pulse text-white relative z-10" />
+            <span className="absolute inset-0 rounded-full animate-ping bg-[#c5a572]/30"></span>
+          </a>
         </div>
       </div>
 
@@ -64,7 +76,7 @@ export default function Footer() {
         © {new Date().getFullYear()} Desert Aromas. All rights reserved.
       </div>
 
-      {/* Scroll to top button with fade */}
+      {/* Scroll to top button */}
       <button
         onClick={scrollToTop}
         aria-label="Scroll to top"
