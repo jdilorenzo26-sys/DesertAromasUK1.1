@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Facebook, Instagram, ArrowUp } from "lucide-react";
-import { FaTiktok } from "react-icons/fa";
 
 export default function Footer() {
   const [showButton, setShowButton] = useState(false);
@@ -59,14 +58,21 @@ export default function Footer() {
             </a>
           ))}
 
-          {/* TikTok with pulse + glow */}
+          {/* TikTok with SVG + pulse */}
           <a
             href="#"
             target="_blank"
             rel="noopener noreferrer"
             className="relative p-2 rounded-full border border-[#c5a572]/40 hover:border-[#c5a572] transition-all duration-300 hover:shadow-[0_0_15px_rgba(197,165,114,0.7)]"
           >
-            <FaTiktok className="w-5 h-5 animate-pulse text-white relative z-10" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              className="w-5 h-5 text-white animate-pulse relative z-10"
+              fill="currentColor"
+            >
+              <path d="M448,209.9v102.4c-40.3,0-79.3-12.9-111.2-36.1v99.3c0,75.2-60.9,136.1-136.1,136.1S64.6,450.7,64.6,375.5c0-72.1,55.4-131,126.2-135.8v102.5c-13.6,4.3-23.5,17.2-23.5,32.3c0,18.8,15.2,34,34,34c18.8,0,34-15.2,34-34V128.1h95.5c8.8,48.8,47.6,88,96.2,96.2C436.2,226.1,448,218.9,448,209.9z"/>
+            </svg>
             <span className="absolute inset-0 rounded-full animate-ping bg-[#c5a572]/30"></span>
           </a>
         </div>
