@@ -71,8 +71,8 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {[
-            { id: 1, name: "Royal Musk", price: "£29.99", image: "/products/sample3.jpg" },
-            { id: 2, name: "Saffron Noir", price: "£44.99", image: "/products/sample4.jpg" },
+            { id: 1, name: "Hayaati", price: "£2.5-£4.00", image: "/products/hayaati.png" },
+            { id: 2, name: "Hawas Ice", price: "£2.50-£4.00", image: "/products/hawasice.png" },
             { id: 3, name: "Island Vanilla Dunes", price: "£2.50 - £4.00", image: "/products/KHAD0002 (2).png" },
           ].map((p, i) => (
             <motion.div
